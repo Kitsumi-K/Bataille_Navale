@@ -98,7 +98,6 @@ public class AIPlayer extends RandomPlayer {
     @Override
     public void tir(Board board) {
         if (listeCoupCouler.isEmpty()) {
-            System.out.println("Aleatoire");
 
             Position pos = new Position();
             for (int i = 0; i < listeCoup.size(); i++) {
@@ -112,7 +111,6 @@ public class AIPlayer extends RandomPlayer {
             listeJoue.add(pos);
 
             if (aTouche(board, pos)) {
-                System.out.println("TOUCHEEEEEEEEEEEEEEEE");
                 if (!aCoule(board, pos)) {
                     listeCoupCouler.add(pos);
                     coupInitial = indice;
@@ -121,7 +119,6 @@ public class AIPlayer extends RandomPlayer {
                 }
             }
         } else {
-            System.out.println("entrée");
 
             Integer x = listeCoup.get(coupInitial).getX();
             Integer y = listeCoup.get(coupInitial).getY();
@@ -130,9 +127,6 @@ public class AIPlayer extends RandomPlayer {
 
             if (checkDir) {
                 while (!played) {
-                    System.out.println("Check Dir");
-                    if (dir != null)
-                        System.out.println("dir : " + dir[0] + "," + dir[1]);
                     for (Position pos : listeCoup) {
                         if (x + dir[0] >= 0 || x + dir[0] < largeur || y + dir[1] >= 0
                                 || y + dir[1] < longueur) {
@@ -143,12 +137,6 @@ public class AIPlayer extends RandomPlayer {
                         }
                     }
 
-                    if (posTir != null)
-                        System.out.println("posTir : " + posTir);
-                    else {
-                        System.out.println("hors jeu");
-                    }
-
                     played = testTir(board, played, posTir);
                     if (dir == null) {
                         this.tir(board);
@@ -156,19 +144,10 @@ public class AIPlayer extends RandomPlayer {
                     }
                     if (played)
                         longueurBateau = 2;
-                    System.out.println("liste coup couler : " + listeCoupCouler);
                 }
             } else {
-                System.out.println("coule");
-                // Integer[] g = { 0, -1 };
 
                 while (!played) {
-
-                    if (dir != null)
-                        System.out.println("dir : " + dir[0] + "," + dir[1]);
-                    else
-                        System.out.println("dir : null");
-                    System.out.println("longueurBateau : " + longueurBateau);
                     for (Position pos : listeCoup) {
                         if ((x + dir[0] * longueurBateau) >= 0 || (x + dir[0] * longueurBateau) < largeur
                                 || (y + dir[1] * longueurBateau) >= 0
@@ -181,12 +160,6 @@ public class AIPlayer extends RandomPlayer {
                         }
                     }
 
-                    if (posTir != null)
-                        System.out.println("posTir : " + posTir);
-                    else {
-                        System.out.println("hors jeu");
-                    }
-
                     played = testTir(board, played, posTir);
                     if (!played) {
                         checkDir = true;
@@ -196,7 +169,6 @@ public class AIPlayer extends RandomPlayer {
                     } else {
                         longueurBateau++;
                     }
-                    System.out.println("liste coup couler : " + listeCoupCouler);
                 }
             }
         }
@@ -215,19 +187,15 @@ public class AIPlayer extends RandomPlayer {
      */
     public Boolean testTir(Board board, Boolean played, Position pos) {
         if (!listeJoue.contains(pos) && dir != null && pos != null) {
-            System.out.println("TIREEEE");
             effectuerTir(board, pos);
             listeJoue.add(pos);
             played = true;
-            System.out.println("coup initial : " + listeCoup.get(coupInitial));
             if (aTouche(board, pos) && !aCoule(board, listeCoup.get(coupInitial))) {
-                System.out.println("TOUCHEEEEEEEEEEEEEEEE HEHE");
                 checkDir = false;
                 listeCoupCouler.add(pos);
                 return played;
 
             } else if (aCoule(board, listeCoup.get(coupInitial))) {
-                System.out.println("COULEEEEEEEEEEEEEEEE");
                 listeCoupCouler.clear();
                 indice = coupInitial + 1;
                 longueurBateau = 0;
