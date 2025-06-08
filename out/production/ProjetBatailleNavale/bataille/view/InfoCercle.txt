@@ -1,0 +1,12 @@
+Commandes pour les cercles des tirs:
+        g.setColor(Color.RED);
+        (pour indiquer quelle couleur le stylo doit utiliser à mon avis)
+        
+        g.drawOval(DIM+30,DIM+30,20,20);
+        (Le drawOval habituel qu'on connait)
+        
+        g.fillOval(DIM+20,DIM+20,40,40);
+        (C'est l'équivalent du draw oval sauf que tu combles l'intérieur en bonus donc à 		   utiliser pour les cercles entiers colorés; PS: il faut penser que comme drawOval
+           Cela commence à dessiner de haut à gauche donc si tu veux un cercle qui soit centré, 
+           il faut penser à enlever la moitié du rayon pour la hauteur et la largeur du cercle)
+        
